@@ -24,6 +24,7 @@ class RocketTest < Minitest::Test
     assert_equal(true, flying)
   end
 
+
   def test_initialize_random_name
     name = @rocket2.name
     assert name
@@ -40,12 +41,24 @@ class RocketTest < Minitest::Test
     refute flying
   end
 
-  def test_initialize_flying
-    flying = @rocket2.flying?
-    refute flying
+  def test_initialize_flying_not_boolean
+    options = {name: "X", colour: "black", flying: "hello"}
+    @rocket = Rocket.new(options)
+    flying = @rocket.flying?
+    assert flying
   end
 
-  def test_land_flying
+  def test_lift_off_false
+    result = @rocket.lift_off
+    refute result
+  end
+
+  def test_lift_off_true
+    result = @rocket2.lift_off
+    assert result
+  end
+
+  def test_land
     result = @rocket.land
     assert result
   end
